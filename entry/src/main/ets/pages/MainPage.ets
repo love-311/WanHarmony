@@ -14,8 +14,8 @@
  */
 
 import router from '@ohos.router';
-import { StyleConstants} from '../constants/StyleConstants';
-import { Logger} from '../utils/Logger';
+import { StyleConstants } from '../constants/StyleConstants';
+import { Logger } from '../utils/Logger';
 import { PageConstants } from '../constants/PageConstants';
 
 import { HomePage } from '../pages/home/HomePage';
@@ -44,30 +44,30 @@ struct MainPage {
         TabContent() {
           WxArticlePage()
         }
-        .tabBar(this.BottomNavigation(buttonInfo[PageConstants.NEW_PRODUCT_INDEX]))
+        .tabBar(this.BottomNavigation(buttonInfo[PageConstants.WX_ARTICLE_INDEX]))
 
         TabContent() {
           SearchPage()
         }
-        .tabBar(this.BottomNavigation(buttonInfo[PageConstants.SHOP_CART_INDEX]))
+        .tabBar(this.BottomNavigation(buttonInfo[PageConstants.SEARCH_INDEX]))
 
         TabContent() {
           ProjectPage()
         }
-        .tabBar(this.BottomNavigation(buttonInfo[PageConstants.PERSONAL_INDEX]))
+        .tabBar(this.BottomNavigation(buttonInfo[PageConstants.PROJECT_INDEX]))
       }
       .barWidth(StyleConstants.FULL_WIDTH)
       .barHeight($r('app.float.vp_fifty_six'))
       .scrollable(false)
       .onChange((index: number) => {
         this.currentPageIndex = index;
-
       })
     }
     .backgroundColor($r('app.color.page_background'))
   }
 
-  @Builder BottomNavigation(button: ButtonInfoModel) {
+  @Builder
+  BottomNavigation(button: ButtonInfoModel) {
     Column({ space: PageConstants.BUTTON_SPACE }) {
       Image(this.currentPageIndex === button.index ? button.selectImg : button.img)
         .objectFit(ImageFit.Contain)

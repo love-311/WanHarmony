@@ -18,17 +18,8 @@
  */
 export class PostData {
   /**
-   * News list item title.
+   * 搜索关键字k
    */
-  title: string = '';
+  k : string = '';
 
-  /**
-   * News list item content.
-   */
-  content: string = '';
-
-  /**
-   * News list item source.
-   */
-  source: string = '';
 }

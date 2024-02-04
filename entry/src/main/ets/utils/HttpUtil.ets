@@ -17,6 +17,7 @@ import http from '@ohos.net.http';
 import { PostData } from '../entity/PostData';
 import ResponseResult from '../entity/ResponseResult';
 import Constants, { ContentType } from '../constants/Constants';
+import { Logger } from './Logger';
 
 /**
  * Initiate an HTTP GET request to the specified URL.
@@ -31,11 +32,11 @@ export function httpRequestGet(url: string) {
  * Initiate an HTTP POST request to the specified URL.
  *
  * @param url URL for initiating an HTTP request
- * @param newsData Additional data of the request
+ * @param postParam Additional data of the request
  * @returns
  */
-export function httpRequestPost(url: string, newsData: PostData) {
-  return httpRequest(url, http.RequestMethod.POST, newsData);
+export function httpRequestPost(url: string, postParam: PostData) {
+  return httpRequest(url, http.RequestMethod.POST, postParam);
 }
 
 /**
@@ -48,6 +49,8 @@ export function httpRequestPost(url: string, newsData: PostData) {
  */
 function httpRequest(url: string, method: http.RequestMethod, params?: PostData): Promise<ResponseResult> {
   let httpRequest = http.createHttp();
+  Logger.error("HTTP POST URL:" + url)
+  Logger.error("HTTP POST PARAMS:" + JSON.stringify(params))
   let responseResult = httpRequest.request(url, {
     method: method,
     readTimeout: Constants.HTTP_READ_TIMEOUT,
@@ -55,11 +58,12 @@ function httpRequest(url: string, method: http.RequestMethod, params?: PostData)
       'Content-Type': ContentType.JSON
     },
     connectTimeout: Constants.HTTP_READ_TIMEOUT,
-    extraData: params
+    extraData: JSON.stringify(params)
   });
   let serverData = new ResponseResult();
   // Processes the data and returns.
   return responseResult.then((value: http.HttpResponse) => {
+    Logger.error("HTTP POST value:" + JSON.stringify(value.result))
     if (value.responseCode === Constants.HTTP_CODE_200) {
       // Obtains the returned data.
       let result = `${value.result}`;
@@ -71,10 +75,12 @@ function httpRequest(url: string, method: http.RequestMethod, params?: PostData)
       serverData.errorMsg = resultJson.errorMsg;
     } else {
       serverData.errorMsg = `${$r('app.string.http_error_message')}&${value.responseCode}`;
+      Logger.error("HTTP POST errorMsg:" + JSON.stringify(serverData))
     }
     return serverData;
   }).catch(() => {
     serverData.errorMsg = $r('app.string.http_error_message');
+    Logger.error("HTTP POST errorMsg:" + serverData)
     return serverData;
   });
 }

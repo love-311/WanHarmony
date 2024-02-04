@@ -1,5 +1,4 @@
 import { StyleConstants } from '../../constants/StyleConstants'
-import HomeArticleListModel from '../../entity/HomeArticleListModel'
 import HomeBannerModel from '../../entity/HomeBannerModel'
 import HomeViewModel from '../../viewmodel/HomeViewModel'
 import { PageData } from '../../entity/PageData'
@@ -7,14 +6,16 @@ import { PullToRefresh } from '@ohos/pulltorefresh'
 import { Logger } from '../../utils/Logger'
 import { StrUtil } from '@yunkss/eftool'
 import { jumpToWeb } from '../../utils/Common'
+import ArticleListModel from '../../entity/ArticleListModel'
 
 @Component
 export struct HomePage {
+  //未知原因必须有初始数据才不会崩溃，貌似是swiper在数据为空时的问题
   @State homeBannerList: HomeBannerModel[] = [
     new HomeBannerModel("我们支持订阅啦~", 30, "https://www.wanandroid.com/blogimgs/42da12d8-de56-4439-b40c-eab66c227a4b.png",
       1, 2, "我们支持订阅啦~", 0, "https://www.wanandroid.com/blog/show/3352")
   ]
-  @State articleListData: PageData<HomeArticleListModel>[] = []
+  @State articleListData: PageData<ArticleListModel>[] = []
   // 需绑定列表或宫格组件
   private scroller: Scroller = new Scroller()
   private pageNum: number = 0
@@ -28,7 +29,7 @@ export struct HomePage {
           scroller: this.scroller,
           customList: () => {
             // 一个用@Builder修饰过的UI方法
-            this.getArticleListView();
+            this.HomeArticleListView();
           },
           // 可选项，下拉刷新回调
           onRefresh: () => {
@@ -62,13 +63,13 @@ export struct HomePage {
   getBannerData() {
     HomeViewModel.getHomeBanner().then((bannerList: HomeBannerModel[]) => {
       this.homeBannerList = bannerList
-    });
+    })
   }
 
   //获取文章数据
   getArticleListData(pageNum: number): Promise<string> {
     return new Promise((resolve, reject) => {
-      HomeViewModel.getArticleList(pageNum).then((articleList: PageData<HomeArticleListModel>[]) => {
+      HomeViewModel.getArticleList(pageNum).then((articleList: PageData<ArticleListModel>[]) => {
         if (pageNum == 0) {
           this.articleListData = articleList
         } else {
@@ -104,9 +105,9 @@ export struct HomePage {
   }
 
   @Builder
-  getArticleListView() {
+  HomeArticleListView() {
     List({ scroller: this.scroller }) {
-      ForEach(this.articleListData, (item: HomeArticleListModel) => {
+      ForEach(this.articleListData, (item: ArticleListModel) => {
         ListItem() {
           Flex() {
             Column() {
@@ -139,9 +140,9 @@ export struct HomePage {
           .padding($r('app.float.vp_twelve'))
           .borderRadius($r('app.float.vp_six'))
           .backgroundColor($r('app.color.page_background'))
-          .onClick(()=>{
+          .onClick(() => {
             Logger.error("onClick")
-            jumpToWeb(item.title,item.link)
+            jumpToWeb(item.title, item.link)
           })
         }
       })

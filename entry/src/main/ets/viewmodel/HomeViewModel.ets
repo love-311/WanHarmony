@@ -3,7 +3,7 @@ import { httpRequestGet } from '../utils/HttpUtil';
 import ResponseResult from '../entity/ResponseResult';
 import HomeBannerModel from '../entity/HomeBannerModel';
 import { Logger } from '../utils/Logger';
-import HomeArticleListModel from '../entity/HomeArticleListModel';
+import ArticleListModel from '../entity/ArticleListModel';
 import { PageData } from '../entity/PageData';
 
 const DEFAULT_HOME_DATA: HomeBannerModel[] = [
@@ -33,14 +33,14 @@ class HomeViewModel {
   }
 
   //首页文章列表
-  getArticleList(pageNumber: number): Promise<PageData<HomeArticleListModel>[]> {
+  getArticleList(pageNum: number): Promise<PageData<ArticleListModel>[]> {
     return new Promise((resolve: Function, reject: Function) => {
-      let url = `${Constants.SERVER}article/list/${pageNumber}/json`;
-      Logger.error('getArticleList url',url)
+      let url = `${Constants.SERVER}article/list/${pageNum}/json`;
+      Logger.error('getArticleList url', url)
       httpRequestGet(url).then((data: ResponseResult) => {
         if (data.errorCode === Constants.SERVER_CODE_SUCCESS) {
-          resolve((JSON.parse(JSON.stringify(data.data)) as PageData<HomeArticleListModel>).datas);
-          Logger.error('getArticleList success', JSON.stringify((JSON.parse(JSON.stringify(data.data)) as PageData<HomeArticleListModel>).datas));
+          resolve((data.data as PageData<ArticleListModel>).datas);
+          Logger.error('getArticleList success', JSON.stringify((data.data as PageData<ArticleListModel>).datas));
         } else {
           Logger.error('getArticleList failed', JSON.stringify(data));
           reject($r('app.string.http_error_message'));

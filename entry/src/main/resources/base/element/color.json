@@ -55,6 +55,14 @@
     {
       "name": "indicator_select",
       "value": "#F74E42"
+    },
+    {
+      "name": "color_999999",
+      "value": "#999999"
+    },
+    {
+      "name": "color_black",
+      "value": "#000000"
     }
   ]
 }

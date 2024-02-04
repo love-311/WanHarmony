@@ -18,44 +18,24 @@ export default class Constants {
   static readonly SERVER: string = 'https://www.wanandroid.com/';
 
   /**
-   * Get the banner data.
+   * 获取首页banner列表数据
    */
   static readonly GET_BANNER_LIST: string = 'banner/json';
 
   /**
-   * Get the banner data.
+   * 获取首页文章列表数据
    */
-  static readonly GET_ARTICLE_LIST: string = '/article/list/${pageNumber}/json';
+  static readonly GET_ARTICLE_LIST: string = 'article/list/${pageNumber}/json';
 
   /**
-   * Get the news type.
+   * 获取所有公众号作者列表数据
    */
-  static readonly GET_NEWS_TYPE: string = 'news/getNewsType';
+  static readonly GET_WX_ARTICLE_AUTHOR_LIST: string = 'wxarticle/chapters/json';
 
   /**
-   * Get the news list.
+   * 获取项目标签列表
    */
-  static readonly GET_NEWS_LIST: string = 'news/getNewsList';
-
-  /**
-   * Get the news list.
-   */
-  static readonly UPLOAD_NEWS: string = 'news/addNews';
-
-  /**
-   * Upload File
-   */
-  static readonly UPLOAD_FILE: string = '/files/upload';
-
-  /**
-   * UploadFile
-   */
-  static readonly IMAGE_PREFIX: string = '/images/';
-
-  /**
-   * url of NewsUploadPage
-   */
-  static readonly NEWS_EDIT_PAGE: string = 'pages/NewsEditPage'
+  static readonly GET_PROJECT_TAG_LIST: string = 'project/tree/json';
 
   /**
    * The request success status code.
@@ -63,34 +43,14 @@ export default class Constants {
   static readonly SERVER_CODE_SUCCESS: number = 0;
 
   /**
-   * The off set coefficient.
-   */
-  static readonly Y_OFF_SET_COEFFICIENT: number = 0.1;
-
-  /**
    * The page size.
    */
-  static readonly PAGE_SIZE: number = 10;
-
-  /**
-   * The refresh and load height.
-   */
-  static readonly CUSTOM_LAYOUT_HEIGHT: number = 70;
-
-  /**
-   * Gt tab data current page.
-   */
-  static readonly GET_TAB_DATA_CURRENT_PAGE: number = 1;
+  static readonly PAGE_SIZE: number = 20;
 
   /**
    * Http request success status code.
    */
   static readonly HTTP_CODE_200: number = 200;
-
-  /**
-   * The animation delay time.
-   */
-  static readonly DELAY_ANIMATION_DURATION: number = 300;
 
   /**
    * The delay time.
@@ -100,112 +60,12 @@ export default class Constants {
   /**
    * The animation duration.
    */
-  static readonly ANIMATION_DURATION: number = 2000;
+  static readonly ANIMATION_DURATION: number = 300;
 
   /**
    * The http timeout duration.
    */
   static readonly HTTP_READ_TIMEOUT: number = 10000;
-
-  /**
-   * Content maxLine.
-   */
-  static readonly CONTENT_MAX_LINE: number = 3;
-
-  /**
-   * List space.
-   */
-  static readonly LIST_SPACE: number = 12;
-
-  /**
-   * Item img space.
-   */
-  static readonly ITEM_IMG_SPACE: number = 8;
-
-  /**
-   * Type font weight.
-   */
-  static readonly TYPE_FONT_WEIGHT: number = 700;
-
-  /**
-   * Title font weight.
-   */
-  static readonly TITLE_FONT_WEIGHT: number = 500;
-
-  /**
-   * Desc font weight.
-   */
-  static readonly DESC_FONT_WEIGHT: number = 400;
-
-  /**
-   * Type aspect ratio.
-   */
-  static readonly TYPE_ASPECT_RATIO: number = 2;
-
-  /**
-   * Desc opacity.
-   */
-  static readonly DESC_OPACITY: number = 0.6;
-
-  /**
-   * 100 percent.
-   */
-  static readonly FULL_PERCENT: string = '100%';
-
-  /**
-   * Divider width.
-   */
-  static readonly DIVIDER_WIDTH: string = '90%';
-
-  /**
-   * Release title.
-   */
-  static readonly RELEASE_TITLE: string = '新闻发布';
-}
-
-/**
- * The RefreshConstant constants.
- */
-export const enum RefreshConstant {
-  DELAY_PULL_DOWN_REFRESH = 50,
-  CLOSE_PULL_DOWN_REFRESH_TIME = 150,
-  DELAY_SHRINK_ANIMATION_TIME = 500
-}
-
-/**
- * The refresh state enum.
- */
-export const enum RefreshState {
-  DropDown = 0,
-  Release = 1,
-  Refreshing = 2,
-  Success = 3,
-  Fail = 4
-}
-
-/**
- * The newsList state enum.
- */
-export const enum PageState {
-  Loading = 0,
-  Success = 1,
-  Fail = 2
-}
-
-/**
- * The file upload state enum.
- */
-export const enum UploadingState {
-  COMPLETE = 'complete',
-  FAIL = 'fail'
-}
-
-/**
- * The request method enum.
- */
-export const enum RequestMethod {
-  POST = 'POST',
-  GET = 'GET'
 }
 
 /**
