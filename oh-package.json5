@@ -7,7 +7,8 @@
   "license": "",
   "dependencies": {
     "@ohos/pulltorefresh": "^2.0.1",
-    "@yunkss/eftool": "^1.0.6"
+    "@yunkss/eftool": "^1.0.6",
+    "@ohos/axios": "^2.1.1"
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.6"

@@ -63,6 +63,10 @@
     {
       "name": "color_black",
       "value": "#000000"
+    },
+    {
+      "name": "tag_color",
+      "value": "#317af7"
     }
   ]
 }
