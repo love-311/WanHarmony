@@ -23,6 +23,11 @@ export default class Constants {
   static readonly GET_BANNER_LIST: string = 'banner/json';
 
   /**
+   * 获取置顶文章数据
+   */
+  static readonly GET_TOP_ARTICLE_LIST: string = 'article/top/json';
+
+  /**
    * 获取首页文章列表数据
    */
   static readonly GET_ARTICLE_LIST: string = 'article/list/${pageNumber}/json';

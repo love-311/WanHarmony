@@ -32,8 +32,28 @@ class HomeViewModel {
     });
   }
 
+  //获取置顶文章列表
+  getTopArticleList(): Promise<ArticleListModel[]> {
+    return new Promise((resolve: Function, reject: Function) => {
+      let url = `${Constants.SERVER}/${Constants.GET_TOP_ARTICLE_LIST}`;
+      httpRequestGet(url).then((data: ResponseResult) => {
+        if (data.errorCode === Constants.SERVER_CODE_SUCCESS) {
+          resolve(data.data);
+          Logger.error('getTopArticleList success', JSON.stringify(data.data));
+        } else {
+          Logger.error('getTopArticleList failed', JSON.stringify(data));
+          reject($r('app.string.http_error_message'));
+        }
+      }).catch((err: Error) => {
+        Logger.error('getTopArticleList failed', JSON.stringify(err));
+        reject($r('app.string.http_error_message'));
+      });
+    });
+  }
+
+
   //首页文章列表
-  getArticleList(pageNum: number): Promise<PageData<ArticleListModel>[]> {
+  getArticleList(pageNum: number): Promise<ArticleListModel[]> {
     return new Promise((resolve: Function, reject: Function) => {
       let url = `${Constants.SERVER}article/list/${pageNum}/json`;
       Logger.error('getArticleList url', url)

@@ -4,4 +4,5 @@ export default class ArticleListModel {
   shareUser: string
   niceDate: string
   link: string
+  isTop: boolean = false
 }
